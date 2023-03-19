@@ -1,0 +1,78 @@
+{% extends '_base_vue.html' %}
+
+{% block title %}Game Scores{% endblock %}
+
+{% block main %}
+<h1 class="mt-5">Game Scores</h1>
+<div class="container-fluid m-auto">
+
+        <div class="row ">
+            
+            <div class="col-6 card border primary mt-0"
+            style="max-width: 50rem;">
+            <h3 class="text-center">Math Scores</h3>
+            {% for score in math_scores %}
+            <div class="card-body">
+                <div class="card-text text-primary"><strong class="text-muted pr-2">USER</strong>  
+                <span class="pr-2"> {{score.user}} </span>  <Strong class="text-muted">SCORE</Strong> 
+                <span class="pl-2">{{score.score}} </span>Points</div>
+                <div class="card-footer text-muted">
+                    <small>{{score.created}}</small>
+                </div>
+            </div>
+            {% endfor %}
+            
+            </div> 
+        
+            <div class="col-6 card border primary mt-0"
+            style="max-width: 50rem;">
+            <h3 class="text-center">Anagram Scores</h3>
+            {% for score in anagram_scores %}
+            <div class="card-body">
+                <div class="card-text text-primary"><strong class="text-muted pr-2">USER</strong>  
+                    <span class="pr-2"> {{score.user}} </span>  <Strong class="text-muted">SCORE</Strong> 
+                    <span class="pl-2">{{score.score}} </span>Points</div>
+                    <div class="card-footer text-muted">
+                        <small>{{score.created}}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>    
+        </div>
+    <nav aria-label="pagination">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="?page=1" class="page-link">&laquo; 1 . . .</a>
+            </li>
+            {% if page_obj.previous_page_number != 1 %}
+            <li class="page-link">
+                <a href="?page={{ page_obj.previous_page_number }}" class="ppage-link">
+                    {{ page_obj.previous_page_number }}
+                </a>
+            </li>
+            {% endif %}
+            {% endif %}
+            <li class="page-item active">
+                <span class="page-link">
+                    {{ page_obj.number }}
+                </span>
+            </li>
+            {% if page_obj.has_next %}
+            {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">
+                    {{ page_obj.next_page_number }}
+                </a>
+            </li>
+            {% endif %}
+            <li class="page-item">
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">
+                    . . .{{ page_obj.paginator.num_pages }} &raquo;
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}
