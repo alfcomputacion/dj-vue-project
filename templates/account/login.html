@@ -4,6 +4,8 @@
 {% block title %}Login{% endblock %}
 
 {% block main %}
+<div class="container-fluid login" >
+
     <div class="card border-primary m-auto mb-3" style="max-width: 30rem;">
         <div class="card-header text-primary text-center">Log in</div>
         <div class="card-body">
@@ -16,12 +18,13 @@
                <p>
                    Need an account?
                    <a href="{% url 'account_signup' %}">SIGN UP</a>
-               </p> 
-               <p>
-                   Lost password?
-                   <a href="{% url 'account_reset_password' %}">RESET PASSWORD</a>
-               </p> 
+                </p> 
+                <p>
+                    Lost password?
+                    <a href="{% url 'account_reset_password' %}">RESET PASSWORD</a>
+                </p> 
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

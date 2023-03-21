@@ -4,9 +4,12 @@
 {% block title %}Sign up{% endblock %}
 
 {% block main %}
-    <div class="card border-primary m-auto mb-3"
+<div class="container-fluid sign-up">
+
+        <div class="card border-primary m-auto mb-3"
         style="max-width: 30rem;">
-        <div class="card-header">
+        <div class="card-header text-primary text-center">Sign up</div>
+        <div class="card-body">
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
@@ -14,4 +17,5 @@
             </form>
         </div>
     </div>
+</div>
 {% endblock %}

@@ -4,15 +4,16 @@ from django.core import serializers
 from .models import GameScore
 from django.views.generic import TemplateView, ListView
 from users.models import CustomUser
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 
 
-class AnagramGameView(TemplateView):
+class AnagramGameView(LoginRequiredMixin, TemplateView):
     template_name = 'games/anagram-game.html'
 
 
-class MathGameView(TemplateView):
+class MathGameView(LoginRequiredMixin, TemplateView):
     template_name = 'games/math-game.html'
 
 
@@ -51,7 +52,7 @@ def get_user(request):
 class GameScoreView(ListView):
     model = GameScore
     paginate_by = 5
-    template_name = 'games/game-score.html'
+    template_name = 'games/game-scores.html'
 
     def get_context_data(self, **kwargs):
         context = super(GameScoreView, self).get_context_data(**kwargs)
