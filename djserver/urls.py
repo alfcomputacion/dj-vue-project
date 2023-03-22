@@ -16,17 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from games.views import record_score
-from games.views import show_score, get_user
+from games.views import show_ledear_board, show_score, get_user
+from pages.views import send_review_email
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     # User admin
+    path('account/my-account/', include('users.urls')),
     path('account/', include('allauth.urls')),
 
     path('', include('pages.urls')),
     path('games/', include('games.urls')),
     path('record-score/', record_score, name='record-score'),
+    path('send-review/', send_review_email, name='send-review'),
     path('api/show-scores/', show_score, name='show-score'),
+    path('api/leader-board/', show_ledear_board, name='leader-board'),
+
     path('api/user/', get_user, name='get-user'),
 
 ]

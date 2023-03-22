@@ -38,9 +38,20 @@ def record_score(request):
 
 
 def show_score(request):
+    data = GameScore.objects.filter(user=request.user)
+    js_data = serializers.serialize('json', data)
+
+    return HttpResponse(js_data, content_type='application/json')
+
+
+def show_ledear_board(request):
     response = list(GameScore.objects.values(
         'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by('game', '-created'))
     return JsonResponse(response, safe=False)
+
+    # data = CustomUser.objects.filter(user__username=request.user)
+    # js_data = serializers.serialize('json', data)
+    # return HttpResponse(js_data, content_type='application/json')
 
 
 def get_user(request):
@@ -63,3 +74,8 @@ class GameScoreView(ListView):
         context['math_scores'] = GameScore.objects.filter(
             game__exact='MATH').order_by('-score')[:5]
         return context
+
+
+class LeaderBoardView(ListView):
+    model = GameScore
+    template_name = 'games/leader-board.html'

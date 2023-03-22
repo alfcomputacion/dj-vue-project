@@ -29,7 +29,7 @@
               <a class="nav-link" href="{% url 'pages:homepage' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:about-us' %}">Contact us</a>
+              <a class="nav-link" href="{% url 'pages:contact-us' %}">Contact us</a>
             </li>
             {% if not user.is_authenticated %}
             <li class="nav-item">
@@ -45,9 +45,14 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'games:anagram-game' %}">Anagram Game</a>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'games:math-game' %}">Math Game</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'games:game-scores' %}">Game Scores</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'games:leader-board' %}">Leader Board</a>
+               <div class="dropdown-divider"></div>
+               <a class="dropdown-item" href="{% url 'my-account' %}">My Account</a>
                <div class="dropdown-divider"></div>
               <form action="{% url 'account_logout' %}" method="post">
                 {% csrf_token %}
