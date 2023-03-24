@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
+# USE_L10N = False
+# USE_TZ = False  # if you plan to disable timezone support
 
 # Application definition
 
@@ -47,9 +50,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     # my apps
+    'common.apps.CommonConfig',
     'games.apps.GamesConfig',
-    'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
+    'pages.apps.PagesConfig',
+    'reviews.apps.ReviewsConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

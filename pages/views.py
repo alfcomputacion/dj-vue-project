@@ -19,6 +19,10 @@ class ContactUsView(TemplateView):
     template_name = 'pages/contact-us.html'
 
 
+class ReviewView(TemplateView):
+    template_name = 'pages/review.html'
+
+
 def send_review_email(request):
     data = json.loads(request.body)
 
