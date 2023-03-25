@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from .models import GameScore
@@ -46,7 +47,8 @@ def show_score(request):
 
 def show_ledear_board(request):
     response = list(GameScore.objects.values(
-        'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by('game', '-created'))
+        'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by('-score', '-created'))
+
     return JsonResponse(response, safe=False)
 
     # data = CustomUser.objects.filter(user__username=request.user)
