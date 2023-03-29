@@ -1,11 +1,15 @@
 <div class="card border-primary m-auto mb-3 text-center"
     style="max-width: 95%; height: 30rem;">
-    <div class="card-header text-white" style="background-color: rgb(62, 62, 62);">Review</div>
-    <div class="card-body" style="background-color: black;">
-        <p class="card-text  text-white mb-3">{{ review.review }}</p>
-        <div class="card-footer text-white">
+    <div class="card-header text-white" style="background-color: rgb(167, 223, 248); text-shadow: .03rem 0 .1rem black;">
+     <h2>Review</h2>
+    </div>
+    <div class="card-body" style="background-color: rgb(11, 149, 248);">
+        <h3 class="card-text text-white p-5 m-5">{{ review.review }}</h3>
+        <div class="card-footer text-white p-5 m-5">
         <small class="muted">
-          User:  {{review.user}}</div>
+          {{ review.created }}
+          by {{review.user|title}}
         </small>
+      </div>
     </div>
 </div>

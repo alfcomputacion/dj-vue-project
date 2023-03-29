@@ -23,8 +23,10 @@ class ReviewView(TemplateView):
     template_name = 'pages/review.html'
 
 
-def send_review_email(request):
+def email_contact_us(request):
     data = json.loads(request.body)
+
+    print(data)
 
     user = request.user
     email = data["email"]
@@ -32,7 +34,8 @@ def send_review_email(request):
     message = data["message"]
     content = str(user) + "  " + message
 
-    send_email(to='alfcomputacion@gmail.com', subject=subject, content=content)
+    send_email(to='alfcomputacion@gmail.com',
+               subject=subject, content=content, sender=email)
 
     response = {
         "success": True

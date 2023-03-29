@@ -11,7 +11,9 @@ def random_review():
     if count > 0:
         i = random.randint(0, count-1)
         review = Review.objects.all()[i]
-        return {'review': review}
+        return {
+            'review': review
+        }
     else:
         return {
             'review': {

@@ -7,9 +7,9 @@
 <div class="container-fluid" style="margin-top: 5rem;">
     <h1 class="text-center text-capitalize">Welcome to my page</h1>
     {% if request.user.is_authenticated %}
-    <h2>{{ user.first_name }}</h2>
+    <h5>Logged in as [{{ user }}] {{ user.first_name }} {{user.last_name }}</h5>
     {% else %}
-    <h2>{{ user }}</h2>
+    <h5>Hi, extranger {{ user }}, please login to play <a href="{% url 'account_login' %}">Log in</a></h5>
     {% endif %}
 
     <div id="demo" class="carousel slide m-auto" data-ride="carousel">
