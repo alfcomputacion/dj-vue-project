@@ -8,3 +8,10 @@
 .navbar{
     box-shadow: .1rem .1rem .2rem  black;
 }
+
+.avatar{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50px;
+    margin-right: 2rem;
+}

@@ -9,7 +9,7 @@
     {% if request.user.is_authenticated %}
     <h5>Logged in as [{{ user }}] {{ user.first_name }} {{user.last_name }}</h5>
     {% else %}
-    <h5>Hi, extranger {{ user }}, please login to play <a href="{% url 'account_login' %}">Log in</a></h5>
+    <h5>{{ user }}, please <a href="{% url 'account_login' %}">Log in</a> to play</h5>
     {% endif %}
 
     <div id="demo" class="carousel slide m-auto" data-ride="carousel">

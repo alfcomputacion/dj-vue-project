@@ -20,6 +20,9 @@ from games.views import show_ledear_board, show_score, get_user
 
 from pages.views import email_contact_us
 from reviews.views import send_review
+
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -39,4 +42,4 @@ urlpatterns = [
 
     path('api/user/', get_user, name='get-user'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
