@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+
+{% block title %}Admin page{% endblock %}
+
+{% block main %}
+    {{user.username}}
+
+    <h2>Custom user</h2>
+    <h3>aqui van los users</h3>
+    {% for user in adminpage_list %}
+        <ul>
+            <li><a href="#">{{user.username}}</a></li>
+        </ul>
+    {% endfor %}
+{% endblock %}

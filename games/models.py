@@ -15,7 +15,7 @@ class GameScore(models.Model):
     ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.PROTECT)
+                             on_delete=models.CASCADE)
     game = models.TextField(choices=GAME_CHOICES, default=MATH)
     score = models.IntegerField()
     max_number = models.IntegerField()

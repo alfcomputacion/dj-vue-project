@@ -17,8 +17,8 @@ def random_review():
     else:
         return {
             'review': {
-                'user': 'Random user.',
-                'review': 'Very good site.',
-                'created': 'Yesterday.'
+                'user': 'Fake Random user.',
+                'review': 'Fake review Very good site.',
+                'created': 'Fake date Yesterday.'
             }
         }

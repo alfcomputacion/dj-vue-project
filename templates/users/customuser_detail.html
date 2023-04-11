@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+
+{% block title %}User Detail{% endblock %}
+
+{% block main %}
+    <div class="card border-primary m-auto mb-3 text-center"
+        style="max-width: 30rem;">
+        <div class="card-header">{{user.first_name}}</div>
+        <div class="card-body text-primary">
+            <h5>
+                <div class="card-title">{{user.email}}</div>
+            </h5>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">
+                {{user.username}}
+            </small>
+        </div>
+    </div>
+{% endblock %}

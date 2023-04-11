@@ -4,7 +4,7 @@
 {% block title %}Home page{% endblock %}
 
 {% block main %}
-<div class="container-fluid" style="margin-top: 5rem;">
+<div class="container-fluid" style="margin-top: 4rem;">
     <h1 class="text-center text-capitalize">Welcome to my page</h1>
     {% if request.user.is_authenticated %}
     <h5>Logged in as [{{ user }}] {{ user.first_name }} {{user.last_name }}</h5>
@@ -25,19 +25,19 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <!-- <img src="{% static 'images/one.jpg' %}" alt="Los Angeles" width="1100" height="500"> -->
+          
             {% random_review %}
           </div>
           <div class="carousel-item">
-            <!-- <img  src="{% static 'images/two.jpg' %}" alt="Chicago" width="1100" height="500"> -->
+          
             {% random_review %}
           </div>
           <div class="carousel-item">
-            <!-- <img  src="{% static 'images/three.jpg' %}" alt="New York" width="1100" height="500"> -->
+          
             {% random_review %}
           </div>
           <div class="carousel-item">
-            <!-- <img  src="{% static 'images/four.jpg' %}" alt="New York" width="1100" height="500"> -->
+          
             {% random_review %}
           </div>
         </div>

@@ -1,4 +1,5 @@
 import json
+from django.db.models import Q
 from datetime import datetime
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
@@ -39,6 +40,10 @@ def record_score(request):
 
 
 def show_score(request):
+    # sort =  json.loads(request.body)
+    # if sort['sort']:
+    #     data = GameScore.objects.filter(user=request.user & Q())
+
     data = GameScore.objects.filter(user=request.user)
     js_data = serializers.serialize('json', data)
 
@@ -56,7 +61,7 @@ def show_ledear_board(request):
     # return HttpResponse(js_data, content_type='application/json')
 
 
-def get_user(request):
+def get_user(LoginRequiredMixin, request):
     data = CustomUser.objects.all()
     js_data = serializers.serialize('json', data)
     return HttpResponse(js_data, content_type='application/json')

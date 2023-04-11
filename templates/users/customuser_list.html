@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+
+{% block title %}Users | admin{% endblock %}
+
+{% block main %}
+<div class="container m-auto pt-4 mt-4"
+    style="max-width: 40rem;">
+<h1>Users, Edit Delete</h1>
+    <b-list-group class="group-striped"> 
+        {% for user in customuser_list %}
+        <b-list-group-item button> 
+            {{ user.first_name }} {{ user.last_name }} {{user.email}} {{user.created}}
+            <a href="{% url 'users:user-delete' user.pk %}">
+                <i class="fa-sharp fa-solid fa-trash text-danger float-right mr-2"></i>
+            </a>
+            <a href="{% url 'users:user-update' user.pk %}">
+                <i class="fas fa-edit float-right mr-2"></i>
+            </a>
+            <br>
+        </b-list-group-item>
+        {% empty %}
+        <b-list-group-item button>No data found.</b-list-group-item>
+        {% endfor %}
+    </b-list-group>
+ 
+</div>    
+{% endblock %}

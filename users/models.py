@@ -13,9 +13,6 @@ class CustomUser(AbstractUser):
 
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
-    def get_absolute_url(self):
-        return reverse('my-account')
-
     def validate_avatar(value):
         w, h = get_image_dimensions(value)
         if w > 250 or h > 250:
