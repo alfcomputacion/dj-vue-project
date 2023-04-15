@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import email_contact_us
+from .views import ReviewUpdateView, ReviewListView
 
+app_name = 'reviews'
 urlpatterns = [
-    path('', email_contact_us, name='email-contact-us')
+    path('', ReviewListView.as_view(), name='review-list'),
+    path('reviews/<int:pk>/update/',
+         ReviewUpdateView.as_view(), name='review-update'),
 ]

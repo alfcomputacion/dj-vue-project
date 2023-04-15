@@ -5,6 +5,10 @@
     padding-top: 6rem;
 }
 
+.divide{
+    padding: .5rem;
+}
+
 .navbar{
     box-shadow: .1rem .1rem .2rem  black;
 }
@@ -15,3 +19,44 @@
     border-radius: 50px;
     margin-right: 2rem;
 }
+
+.review-body{
+    background-color: rgb(11, 149, 248); 
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+.review-card{
+    max-width: 95%; 
+    height: 30rem;
+}
+
+#review-text, .review-footer{
+    padding: 3rem;
+    margin: 3rem;
+}
+#review-text{
+    font-size: x-large;
+    text-overflow: ellipsis;
+}
+
+.review-footer{
+    font-size: medium;
+}
+
+@media only screen and (max-width: 600px) {
+    #review-text{
+        font-size: small;
+        text-overflow: hidden;
+        overflow: hidden;
+    }
+
+    #review-text, .review-footer{
+        padding: 1.5rem;
+        margin: 1.5rem;
+    }
+    
+    .review-footer{
+        font-size: small;
+    }
+    }

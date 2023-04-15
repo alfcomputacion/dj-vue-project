@@ -1,5 +1,11 @@
 import json
+from django.urls import reverse_lazy
 from django.http import JsonResponse
+from django.views.generic import UpdateView, ListView
+from .models import Review
+from users.models import CustomUser
+from django.contrib.auth import get_user_model
+from .forms import ReviewForm
 
 from .models import Review
 
@@ -21,3 +27,14 @@ def send_review(request):
     }
 
     return JsonResponse(response)
+
+
+class ReviewUpdateView(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    success_url = reverse_lazy('users:users-list')
+
+
+class ReviewListView(ListView):
+    model = Review
+    paginate_by = 5

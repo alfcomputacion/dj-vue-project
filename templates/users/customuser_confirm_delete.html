@@ -4,7 +4,7 @@
 
 {% block main %}
     <div class="container pt-3"
-        style="max-width: 30rem;">
+        style="max-width: 40rem;">
         <div class="card m-auto mb-3">
             <div class="card-header bg-primary text-white">User Delete confirmation</div>
             <div class="card-body">
@@ -14,11 +14,11 @@
                     <form action="" method="post">
                         {% csrf_token %}
                         <div class="bg-warning p-3 mb-1 text-center rounded">
-                            <strong><h5> Warning:</h5> Any progress and reviews are going to be deleted.</strong>
-
+                            <strong><h5> Warning:</h5> If you delete this user, any progress and reviews are going to be lost.</strong>
                         </div>
-                        <button class="btn btn-danger form-control">Submit</button>
+                        <button class="btn btn-danger form-control mb-1">Delete</button>
                     </form>
+                    <a href="{% url 'users:users-list' %}" class="btn btn-info form-control">Cancel</a>
                 </div>
             </div>
         </div>

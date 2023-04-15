@@ -7,12 +7,26 @@
 
 
 {% block main %}
-    <div class="card border-primary m-auto  pt-3 mb-3 bg-dark text-white" style="max-width: 40rem;">
-        <div class="card-title text-center text-primary">{{ form.username.value|upper }} Account</div>
+<span class="divide"></span>
+    <div class="card border-primary m-auto  pt-4 mb-3 bg-light" style="max-width: 40rem;">
+        <div class="card-title text-center">You are on <span class="text-primary">{{ form.username.value }}</span> account</div>
         <div class="card-body">
-      
+            {% if user.avatar and not form.avatar.errors %}
+            <img style="width: 5rem;" src="{{ user.avatar.url }}" alt="Avatar" class="avatar img-thumbnail float-left d-block">
+            {% endif %}
             <form action="" method="post" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
+                
+                <div class="form-row">
+                    
+                <div class="form-group col-md-12 mb-5">
+    
+                    <label for="id_avatar">Avatar</label>
+                    <input type="file" name="avatar" accept="image/*" 
+                    class="clearablefileinput form-control-file" 
+                    id="id_avatar">
+                </div>
+                </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6 mb-0">
@@ -36,13 +50,20 @@
                     </div>
                 </div>
                
-                <button class="btn btn-success form-control mb-3">Update</button>
+                <button class="btn btn-success form-control mb-0">Update</button>
             </form>
         
         </div>
-        <div class="card-footer">
-            <a href="{% url 'users:user-delete' user.pk %}" class="btn btn-danger form-control">Delete</a>
-            
+        <div class="card-footer form-row m-2 p-1">
+
+            <div class="col-md-6 mb-0">
+                <a href="{% url 'users:user-delete' user.pk %}" class="btn btn-danger form-control">Delete</a>
+                
+            </div>
+            <div class="col-md-6 mb-0">
+                <a href="{% url 'users:users-list' %}" class="btn btn-info form-control">Cancel</a>
+                
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Add/Update Review{% endblock %}
+
+{% block main %}
+<div class="divide"></div>
+    <div class="card border-primary m-auto mb-3 p-3"
+    style="max-width: 30rem">
+    <form method="post">
+        {% csrf_token %}
+        {{form.user|as_crispy_field}}
+        {{ form.review|as_crispy_field}}
+        {{ form.featured|as_crispy_field}}
+        
+        <button class="btn btn-success form-control float-right">Submit</button>
+    </form>
+    <a class="btn btn-info form-control mt-1" href="{% url 'users:users-list' %}">Cancel</a>
+</div>
+
+{% endblock %}

@@ -3,9 +3,9 @@
     <div class="card-header text-white" style="background-color: rgb(167, 223, 248); text-shadow: .03rem 0 .1rem black;">
      <h2>Review</h2>
     </div>
-    <div class="card-body" style="background-color: rgb(11, 149, 248);">
-        <h3 class="card-text text-white p-5 m-5">{{ review.review }}</h3>
-        <div class="card-footer text-white p-5 m-5">
+    <div class="card-body review-body">
+        <h6 id="review-text" class="card-text text-white">{{ review.review }}</h6>
+        <div class="card-footer review-footer text-white">
         <small class="muted">
           {{ review.created }}
           by {{review.user|title}}

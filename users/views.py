@@ -29,6 +29,7 @@ class UserAdminPageView(UpdateView):
 
 class CustomUserList(LoginRequiredMixin, ListView):
     model = CustomUser
+    paginate_by = 1
 
 
 class CustomUserDetail(DetailView):

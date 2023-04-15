@@ -3,25 +3,45 @@
 {% block title %}Users | admin{% endblock %}
 
 {% block main %}
-<div class="container m-auto pt-4 mt-4"
+<div class="container m-auto pt-4 mt-4 users-list"
     style="max-width: 40rem;">
 <h1>Users, Edit Delete</h1>
-    <b-list-group class="group-striped"> 
+    <ul class="list-group list-group-flush"> 
         {% for user in customuser_list %}
-        <b-list-group-item button> 
-            {{ user.first_name }} {{ user.last_name }} {{user.email}} {{user.created}}
+        <li class="list-group-item"> 
+            
+                {{ user.first_name }} {{ user.last_name }} 
+            
             <a href="{% url 'users:user-delete' user.pk %}">
-                <i class="fa-sharp fa-solid fa-trash text-danger float-right mr-2"></i>
+                <i class="fa-sharp fa-solid fa-trash text-danger float-right mr-2 mt-1" style="font-size: 2rem;"></i>
             </a>
             <a href="{% url 'users:user-update' user.pk %}">
-                <i class="fas fa-edit float-right mr-2"></i>
+                <i class="fas fa-edit float-right mr-2" style="font-size: 2.3rem;"></i>
             </a>
-            <br>
-        </b-list-group-item>
+            <a class="btn btn-primary float-right mr-2" data-toggle="collapse" href="#example-{{user.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                {{user.num_reviews}} Reviews
+            </a>
+        </li>
+         
+            {% for review in user.reviews.all %}
+           
+                <div class="collapse" id="example-{{user.id}}">
+                    <div class="card card-body">
+                        {{review.review}}
+                        <a href="{% url 'reviews:review-update' review.id %}"><i class="fas fa-edit float-right mr-2 mt-1" ></i>
+                        </a>
+                    </div>
+                </div>
+           
+            {% endfor %}
+            
+            
+        
         {% empty %}
-        <b-list-group-item button>No data found.</b-list-group-item>
+        <li class="list-group-item">No data found.</li>
         {% endfor %}
-    </b-list-group>
+        
+    </ul>
  
 </div>    
 {% endblock %}

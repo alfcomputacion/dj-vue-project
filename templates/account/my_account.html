@@ -5,22 +5,60 @@
 {% block title %}My account{% endblock %}
 
 {% block main %}
+<span class="divide"></span>
 <div class="container-fluid pt-2">
     <div class="card border-primary m-auto mb-3"
     style="max-width: 40rem;">
     <div class="card-header text-center text-primary" style="display: inline-block;">My account</div>
     <div class="card-body">
+        
         {% if user.avatar and not form.avatar.errors %}
         <img style="width: 5rem;" src="{{ user.avatar.url }}" alt="Avatar" class="avatar img-thumbnail float-left d-block">
         {% endif %}
-        <form action="{% url 'users:my-account' %}" method="post" enctype="multipart/form-data" class="m-auto" novalidate>
+        <form action="" method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
-            {{form|crispy}}
-            <div class="m-auto">
+            
+            <div class="form-row">
+                
+            <div class="form-group col-md-12 mb-5">
 
-                <a href="{% url 'account_change_password' %}" class="btn btn-info ">CHANGE PASSWORD</a>
-                <button class="btn btn-success ">UPDATE</button>
+                <label for="id_avatar">Avatar</label>
+                <input type="file" name="avatar" accept="image/*" 
+                class="clearablefileinput form-control-file" 
+                id="id_avatar">
             </div>
+            </div>
+        
+             <div class="form-row">
+
+                 <div class="form-group col-md-6 mb-0">
+                     {{form.email|as_crispy_field}}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{form.username|as_crispy_field}}
+                    </div>
+            </div>   
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{form.first_name|as_crispy_field}}
+                </div>
+                <div class="from-group col-md-6 mb-0">
+                    {{form.last_name|as_crispy_field}}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12 mb-0">
+                    {{form.dob|as_crispy_field}}
+                </div>
+            </div>
+           <div class="form-row m-auto">
+            <div class="form-group col-md-6 mb-0">
+                <button class="btn btn-success form-control mb-3">Update</button>
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                <a href="{% url 'account_change_password' %}" class="btn btn-info form-control">CHANGE PASSWORD</a>
+            </div>
+           </div>
         </form>
     </div>
     </div>
