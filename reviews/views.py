@@ -38,3 +38,10 @@ class ReviewUpdateView(UpdateView):
 class ReviewListView(ListView):
     model = Review
     paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(ReviewListView, self).get_context_data(**kwargs)
+        page = self.kwargs.get('page_obj')
+        context['page'] = page
+        print(context['page'])
+        return context

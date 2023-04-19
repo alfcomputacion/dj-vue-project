@@ -3,6 +3,8 @@ from django.db.models import Q
 from datetime import datetime
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
+from django.core.paginator import Paginator
+
 from .models import GameScore
 from django.views.generic import TemplateView, ListView
 from users.models import CustomUser
@@ -39,15 +41,48 @@ def record_score(request):
     return JsonResponse(resopnse)
 
 
+# def show_score(request):
+#     # sort =  json.loads(request.body)
+#     # if sort['sort']:
+#     #     data = GameScore.objects.filter(user=request.user & Q())
+
+#     data = GameScore.objects.filter(user=request.user)
+#     js_data = serializers.serialize('json', data)
+
+#     return HttpResponse(js_data, content_type='application/json')
+
 def show_score(request):
-    # sort =  json.loads(request.body)
-    # if sort['sort']:
-    #     data = GameScore.objects.filter(user=request.user & Q())
+    page_number = json.loads(request.body)
+    print(f"++++++ {page_number['page']} ++++++")
+    per_page = 3
+    reviews = GameScore.objects.filter(
+        user=request.user
+    )
+    paginator = Paginator(reviews, per_page)
+    page_obj = paginator.get_page(page_number['page'])
+    num_pages = page_obj.paginator.num_pages
 
-    data = GameScore.objects.filter(user=request.user)
-    js_data = serializers.serialize('json', data)
+    print(num_pages)
+    data = page_obj.object_list.count()
+    print(reviews.count())
+    # js_data = serializers.serialize('json', data)
+    js_data = [{"game": kw.game, "operation": kw.operation,
+                "max_number": kw.max_number, "score": kw.score,
+                "created": kw.created} for kw in page_obj.object_list]
 
-    return HttpResponse(js_data, content_type='application/json')
+    payload = {
+        "page": {
+            "current": page_obj.number,
+            "has_next": page_obj.has_next(),
+            "has_previous": page_obj.has_previous(),
+            "total_records": reviews.count(),
+            "num_pages": num_pages,
+
+
+        },
+        "data": js_data
+    }
+    return JsonResponse(payload)
 
 
 def show_ledear_board(request):
