@@ -6,7 +6,8 @@
 <div class="container m-auto pt-4 mt-4 users-list"
     style="max-width: 40rem;">
 <h1>Users, Edit Delete</h1>
-    <ul class="list-group list-group-flush"> 
+    <ul class="list-group list-group-flush scroll"
+        style="height: 30rem;"> 
         {% for user in customuser_list %}
         <li class="list-group-item"> 
             
@@ -28,18 +29,20 @@
                 <div class="collapse border-primary rounded" id="example-{{user.id}}">
                     <div class="card card-body">
                         {{review.review}}
-                        {% if review.featured == 1 %}
+                        {% if review.featured %}
                         <a href="{% url 'reviews:review-update' review.id %}"><i class="fas fa-edit float-right mr-2 mt-1"></i>
                         </a>
-                      <div class="text-muted">
-                          Feature
+                      <div class="text-info">
+                          Featured
                     </div>  
                         
                         {% else %}
                         <a href="{% url 'reviews:review-update' review.id %}"><i class="fas fa-edit float-right mr-2 mt-1"></i>
                         </a>
                         <div class="text-secondary">
-                            Featured
+                          <strong>
+                              Edit to feature review.
+                          </strong> 
                         </div>
                         {% endif %}
                     </div>
@@ -54,6 +57,7 @@
         {% endfor %}
         
     </ul>
+    <span>Page {{page_obj.number}} of {{ page_obj.paginator.num_pages}}</span>
     <nav aria-label="pagination">
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}

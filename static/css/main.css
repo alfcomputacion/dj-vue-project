@@ -4,7 +4,14 @@
     background: rgb(193, 193, 193); 
     padding-top: 6rem;
 }
-
+.scroll{
+    margin-top: 0;
+    margin: auto;
+    max-width: 40rem;
+    height: 25rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 .divide{
     padding: .5rem;
 }

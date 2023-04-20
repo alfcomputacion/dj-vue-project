@@ -38,4 +38,4 @@ class CustomUserDetail(DetailView):
 
 class CustomUserDelete(DeleteView):
     model = CustomUser
-    success_url = 'users:user-detail'
+    success_url = reverse_lazy('users:users-list')

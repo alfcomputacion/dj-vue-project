@@ -9,11 +9,13 @@ register = template.Library()
 def random_review():
     count = Review.objects.count()
     if count > 0:
-        i = random.randint(0, count-1)
-        review = Review.objects.all()[i]
-        return {
-            'review': review
-        }
+        while True:
+            i = random.randint(0, count-1)
+            review = Review.objects.all()[i]
+            if review.featured == True:
+                return {
+                    'review': review
+                }
     else:
         return {
             'review': {
