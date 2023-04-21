@@ -52,14 +52,21 @@ def record_score(request):
 #     return HttpResponse(js_data, content_type='application/json')
 
 def show_score(request):
-    page_number = json.loads(request.body)
-    print(f"++++++ {page_number['page']} ++++++")
+    post_data = json.loads(request.body)
+    game = post_data['game']
+    asc = post_data['asc']
+    order = post_data['order']
+    if asc:
+        order = '-' + order
+
     per_page = 3
+
     reviews = GameScore.objects.filter(
-        user=request.user
-    )
+        user=request.user, game=game
+    ).order_by(order)
+
     paginator = Paginator(reviews, per_page)
-    page_obj = paginator.get_page(page_number['page'])
+    page_obj = paginator.get_page(post_data['page'])
     num_pages = page_obj.paginator.num_pages
 
     print(num_pages)
@@ -86,8 +93,18 @@ def show_score(request):
 
 
 def show_ledear_board(request):
+    post_data = json.loads(request.body)
+    # game = post_data['game']
+    asc = post_data['asc']
+    order = post_data['order']
+    print(asc)
+    if asc:
+        order = '-' + order
+    print(order)
+
     response = list(GameScore.objects.values(
-        'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by('-score', '-created'))
+        # 'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by('-score', '-created'))
+        'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by(order, '-created'))
 
     return JsonResponse(response, safe=False)
 

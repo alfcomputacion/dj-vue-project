@@ -8,7 +8,7 @@ class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE, related_name='reviews')
     review = models.TextField(max_length=255)
-    featured = models.BooleanField()
+    featured = models.BooleanField(default=False)
 
     created = models.DateTimeField(auto_now_add=True)
 
