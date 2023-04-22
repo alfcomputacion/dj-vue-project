@@ -6,12 +6,13 @@
 <div class="container m-auto pt-4 mt-4 users-list"
     style="max-width: 40rem;">
 <h1>Users, Edit Delete</h1>
+<h6 class="text-muted">To feature a review just click reviews and edit review.</h6>
     <ul class="list-group list-group-flush scroll"
         style="height: 30rem;"> 
         {% for user in customuser_list %}
         <li class="list-group-item"> 
             
-                {{ user.first_name }} {{ user.last_name }} 
+                {{ user.first_name }} {{ user.last_name }} ({{user.username}})
             
             <a href="{% url 'users:user-delete' user.pk %}">
                 <i class="fa-sharp fa-solid fa-trash text-danger float-right mr-2 mt-1" style="font-size: 2rem;"></i>

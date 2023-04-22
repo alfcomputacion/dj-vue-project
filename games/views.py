@@ -41,16 +41,6 @@ def record_score(request):
     return JsonResponse(resopnse)
 
 
-# def show_score(request):
-#     # sort =  json.loads(request.body)
-#     # if sort['sort']:
-#     #     data = GameScore.objects.filter(user=request.user & Q())
-
-#     data = GameScore.objects.filter(user=request.user)
-#     js_data = serializers.serialize('json', data)
-
-#     return HttpResponse(js_data, content_type='application/json')
-
 def show_score(request):
     post_data = json.loads(request.body)
     game = post_data['game']
@@ -61,17 +51,17 @@ def show_score(request):
 
     per_page = 3
 
-    reviews = GameScore.objects.filter(
+    scores = GameScore.objects.filter(
         user=request.user, game=game
     ).order_by(order)
 
-    paginator = Paginator(reviews, per_page)
+    paginator = Paginator(scores, per_page)
     page_obj = paginator.get_page(post_data['page'])
     num_pages = page_obj.paginator.num_pages
 
     print(num_pages)
     data = page_obj.object_list.count()
-    print(reviews.count())
+    print(scores.count())
     # js_data = serializers.serialize('json', data)
     js_data = [{"game": kw.game, "operation": kw.operation,
                 "max_number": kw.max_number, "score": kw.score,
@@ -82,7 +72,7 @@ def show_score(request):
             "current": page_obj.number,
             "has_next": page_obj.has_next(),
             "has_previous": page_obj.has_previous(),
-            "total_records": reviews.count(),
+            "total_records": scores.count(),
             "num_pages": num_pages,
 
 
@@ -94,18 +84,33 @@ def show_score(request):
 
 def show_ledear_board(request):
     post_data = json.loads(request.body)
-    # game = post_data['game']
+    game = post_data['game']
     asc = post_data['asc']
     order = post_data['order']
-    print(asc)
+    per_page = 10
+
     if asc:
         order = '-' + order
-    print(order)
 
-    response = list(GameScore.objects.values(
-        # 'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by('-score', '-created'))
-        'user__username', 'score', 'operation', 'max_number', 'game', 'created').order_by(order, '-created'))
+    scores = list(GameScore.objects.values(
 
+        'user__username', 'score', 'operation', 'max_number', 'game', 'created').filter(game=game).order_by(order, '-created'))
+    paginator = Paginator(scores, per_page)
+
+    page_obj = paginator.get_page(post_data['page'])
+    num_pages = page_obj.paginator.num_pages
+    # print(page_obj.object_list)
+
+    response = {
+        "page": {
+            "current": page_obj.number,
+            "has_next": page_obj.has_next(),
+            "has_previous": page_obj.has_previous(),
+            # "total_records": scores.count(),
+            "num_pages": num_pages,
+        },
+        "data": page_obj.object_list
+    }
     return JsonResponse(response, safe=False)
 
     # data = CustomUser.objects.filter(user__username=request.user)

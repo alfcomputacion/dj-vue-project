@@ -8,12 +8,12 @@
         <div class="card m-auto mb-3">
             <div class="card-header bg-primary text-white text-center">Delete confirmation</div>
             <div class="card-body">
-                <div class="card-title text-info"><strong>{{user.username}}</strong></div>
+                <div class="card-title text-info"><strong>{{object.username}}</strong></div>
                 <div class="card-text">
                     <form  action="" method="post">
                         {% csrf_token %}
                         <div class="bg-warning p-3 mb-2 text-center rounded">
-                            Do you want to delete user and records for: <strong>{{ user.username}}</strong>?
+                            Do you want to delete user and records for: <strong>{{ object.username}}</strong>?
                             <strong><h5> Warning:</h5> If you delete this user, any progress and reviews are going to be lost.</strong>
                         </div>
                         <button class="btn btn-danger form-control mb-1">Delete</button>
