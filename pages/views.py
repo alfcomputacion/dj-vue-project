@@ -1,4 +1,5 @@
 import json
+import html
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import TemplateView
 
@@ -29,9 +30,11 @@ def email_contact_us(request):
     print(data)
 
     user = request.user
-    email = data["email"]
-    subject = data["subject"]
-    message = data["message"]
+    email = html.escape(data["email"])
+    subject = html.escape(data["subject"])
+    message = html.escape(data["message"])
+    if len(message) > 499:
+        message = message[0:500]
     content = str(user) + "  " + message
 
     send_email(to='alfcomputacion@gmail.com',

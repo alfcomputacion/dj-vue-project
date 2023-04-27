@@ -1,10 +1,10 @@
 import json
+import html
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.views.generic import UpdateView, ListView
 from .models import Review
-from users.models import CustomUser
-from django.contrib.auth import get_user_model
+
 from .forms import ReviewForm
 
 from .models import Review
@@ -16,8 +16,11 @@ def send_review(request):
     data = json.loads(request.body)
 
     user = request.user
-    review = data["review"]
-    featured = 1
+    tmp_review = data["message"]
+    review = html.escape(tmp_review)
+    if len(review) > 254:
+        review = review[0:255]
+    featured = False
 
     newReview = Review(user=user, review=review, featured=featured)
     newReview.save()
@@ -39,9 +42,9 @@ class ReviewListView(ListView):
     model = Review
     paginate_by = 5
 
-    def get_context_data(self, **kwargs):
-        context = super(ReviewListView, self).get_context_data(**kwargs)
-        page = self.kwargs.get('page_obj')
-        context['page'] = page
-        print(context['page'])
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(ReviewListView, self).get_context_data(**kwargs)
+    #     page = self.kwargs.get('page_obj')
+    #     context['page'] = page
+    #     print(context['page'])
+    #     return context
