@@ -42,10 +42,12 @@ def record_score(request):
 
 
 def show_score(request):
+    user = str(request.user)
     post_data = json.loads(request.body)
     game = post_data['game']
     asc = post_data['asc']
     order = post_data['order']
+
     if asc:
         order = '-' + order
 
@@ -76,8 +78,12 @@ def show_score(request):
             "num_pages": num_pages,
 
 
+
+
         },
-        "data": js_data
+        "user": user,
+        "data": js_data,
+
     }
     return JsonResponse(payload)
 
@@ -87,6 +93,8 @@ def show_ledear_board(request):
     game = post_data['game']
     asc = post_data['asc']
     order = post_data['order']
+    user = str(request.user)
+    print(type(user))
     per_page = 10
 
     if asc:
@@ -94,7 +102,7 @@ def show_ledear_board(request):
 
     scores = list(GameScore.objects.values(
 
-        'user__username', 'score', 'operation', 'max_number', 'game', 'created').filter(game=game).order_by(order, '-created'))
+        'user__avatar', 'user__username', 'score', 'operation', 'max_number', 'game', 'created').filter(game=game).order_by(order, '-created'))
     paginator = Paginator(scores, per_page)
 
     page_obj = paginator.get_page(post_data['page'])
@@ -109,6 +117,7 @@ def show_ledear_board(request):
             # "total_records": scores.count(),
             "num_pages": num_pages,
         },
+        "user": user,
         "data": page_obj.object_list
     }
     return JsonResponse(response, safe=False)
