@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 
+{% load static %}
 {% block title %}Delete Confirm{% endblock %}
 
 {% block main %}
@@ -8,11 +9,18 @@
         <div class="card m-auto mb-3">
             <div class="card-header bg-primary text-white text-center">Delete confirmation</div>
             <div class="card-body">
+
                 <div class="card-title text-info"><strong>{{object.username}}</strong></div>
                 <div class="card-text">
                     <form  action="" method="post">
                         {% csrf_token %}
                         <div class="bg-warning p-3 mb-2 text-center rounded">
+                            {% if object.avatar %}
+                            <img src="{{object.avatar.url}}" alt="avatar" 
+                            style="width: 5rem; height: 5rem; border-radius: 50%; float: left;margin-right: 1rem;">
+                            {% else %}
+                            <img src="{% static 'images/logo.png' %}" alt="logo" style="width: 3rem;height: 3rem; border-radius: 50%; float: left;">
+                          {% endif %}
                             Do you want to delete user and records for: <strong>{{ object.username}}</strong>?
                             <strong><h5> Warning:</h5> If you delete this user, any progress and reviews are going to be lost.</strong>
                         </div>
