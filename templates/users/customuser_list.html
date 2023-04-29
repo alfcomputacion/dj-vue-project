@@ -1,9 +1,10 @@
 {% extends '_base.html' %}
 
+{% load static %}
 {% block title %}Users | admin{% endblock %}
 
 {% block main %}
-<div class="container m-auto pt-4 mt-4 users-list"
+<div class="container m-auto pt-2  users-list"
     style="max-width: 40rem;">
 <h1>Users, Edit Delete</h1>
 <h6 class="text-muted">To feature a review just click reviews and edit review.</h6>
@@ -11,16 +12,25 @@
         style="height: 30rem;"> 
         {% for user in customuser_list %}
         <li class="list-group-item"> 
-            
-                {{ user.first_name }} {{ user.last_name }} ({{user.username}})
+            {% if user.avatar %}
+            <img src="{{user.avatar.url}}" alt="avatar" style="width: 3rem;height: 3rem; border-radius: 50%; float: left;">
+            {% else %}
+            <img src="{% static 'images/logo.png' %}" alt="logo" style="width: 3rem;height: 3rem; border-radius: 50%; float: left;">
+            {% endif %}
+            <span class="pl-4 text-info">
+                <strong>{{user.username}}</strong> <br>
+            </span>
+            <span class="text-secondary pl-2">
+                    <strong>{{ user.first_name }} {{ user.last_name }} </strong>
+              </span>  
             
             <a href="{% url 'users:user-delete' user.pk %}">
-                <i class="fa-sharp fa-solid fa-trash text-danger float-right mr-2 mt-1" style="font-size: 2rem;"></i>
+                <i class="fa-sharp fa-solid fa-trash text-danger float-right mr-2" style="font-size: 2rem;"></i>
             </a>
             <a href="{% url 'users:user-update' user.pk %}">
-                <i class="fas fa-edit float-right mr-2" style="font-size: 2.3rem;"></i>
+                <i class="fas fa-edit float-right mr-2 " style="font-size: 2.3rem;"></i>
             </a>
-            <a class="btn btn-primary float-right mr-2" data-toggle="collapse" href="#example-{{user.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn btn-primary float-right mr-2 " data-toggle="collapse" href="#example-{{user.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                 {{user.num_reviews}} Reviews
             </a>
         </li>

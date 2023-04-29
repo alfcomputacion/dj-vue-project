@@ -7,7 +7,11 @@
 <div class="container-fluid" style="margin-top: 4rem;">
     <h1 class="text-center text-capitalize">Welcome to my page</h1>
     {% if request.user.is_authenticated %}
-    <h5>Logged in as [{{ user }}] {{ user.first_name }} {{user.last_name }}</h5>
+    {% if user.avatar %}
+      <img src="{{user.avatar.url}}" alt="avatar" 
+      style="width: 3rem; height: 3rem; border-radius: 50%; float: left;margin-right: 1rem;">
+    {% endif %}
+    <h5 class="pt-2">Logged in as {{ user }}</h5>
     {% else %}
     <h5>{{ user }}, please <a href="{% url 'account_login' %}">Log in</a> to play</h5>
     {% endif %}
