@@ -1,14 +1,26 @@
-<div class="card border-primary m-auto mb-3 text-center"
+{% load static %}
+
+<div class="card border-primary m-auto mb-3 text-center box-shadow rounded"
     style="max-width: 95%; height: 30rem;">
     <div class="card-header text-white" style="background-color: rgb(167, 223, 248); text-shadow: .03rem 0 .1rem black;">
      <h2>Review</h2>
     </div>
-    <div class="card-body review-body">
-        <h6 id="review-text" class="card-text text-white">{{ review.review }}</h6>
-        <div class="card-footer review-footer text-white">
+    <div class="card-body review-body h-100">
+      <div class="card-text text-white">
+
+        <p id="review-text">{{ review.review }}</p>
+      </div>
+        <div class="card-footer mt-auto review-footer text-white">
         <small class="muted">
           {{ review.created }}
-          by {{review.user|title}}
+          {% if review.user.avatar %}
+           <img class="m-1" style="width: 2rem; height: 2rem; border-radius: 50%;" 
+           src="{{review.user.avatar.url}}" alt="avatar">
+           {% else %}
+           <img class="m-1" style="width: 2rem; height: 2rem; border-radius: 50%;" 
+           src="{% static 'images/logo.png' %}" alt="avatar">
+          {% endif %}
+          {{review.user|title}}
         </small>
       </div>
     </div>

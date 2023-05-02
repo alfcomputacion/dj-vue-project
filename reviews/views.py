@@ -1,5 +1,7 @@
 import json
 import html
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.views.generic import UpdateView, ListView
@@ -32,19 +34,13 @@ def send_review(request):
     return JsonResponse(response)
 
 
-class ReviewUpdateView(UpdateView):
+class ReviewUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Review
     form_class = ReviewForm
+    success_message = 'Update Successful'
     success_url = reverse_lazy('users:users-list')
 
 
 class ReviewListView(ListView):
     model = Review
     paginate_by = 5
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(ReviewListView, self).get_context_data(**kwargs)
-    #     page = self.kwargs.get('page_obj')
-    #     context['page'] = page
-    #     print(context['page'])
-    #     return context

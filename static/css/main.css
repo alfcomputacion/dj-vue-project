@@ -1,6 +1,13 @@
 body{
    background: whitesmoke;
 }
+.box-shadow{
+
+    box-shadow: .05rem .1rem 0.5rem black;
+}
+h1{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 footer{
     color: white;
     background: #00008B;
@@ -26,6 +33,7 @@ footer{
 
 .navbar{
     box-shadow: .1rem .1rem .2rem  black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .avatar{
@@ -41,23 +49,81 @@ footer{
     overflow: hidden;
 }
 
-.review-card{
-    max-width: 95%; 
-    height: 30rem;
-}
+
 
 #review-text, .review-footer{
-    padding: 3rem;
-    margin: 3rem;
+    padding: 2rem;
+    margin: 2rem;
 }
 #review-text{
-    font-size: x-large;
+    font-size: 1.25rem;
     text-overflow: ellipsis;
 }
 
 .review-footer{
-    font-size: medium;
+    font-size: small;
 }
+/* #region MESSAGES */ 
+.alert{
+    margin: 5% 40%;
+    z-index: 100;
+}
+.msg{
+    position: absolute;
+    background-color: palegoldenrod;
+    color: black;
+}
+.msgdebug{
+    position: absolute;
+    background-color: slategray;
+    color: white;
+}
+.msginfo{
+    position: absolute;
+    background-color: azure;
+    color: darkblue;
+}
+.msgsuccess{
+    position: absolute;
+    background-color: lightgreen;
+    color: darkgreen;
+}
+.msgwarning{
+    position: absolute;
+    background-color: lightgoldenrodyellow;
+    color: darkgoldenrod;
+}
+.msgerror{
+    position: absolute;
+    background-color: pink;
+    color: darkred;
+}
+
+
+/* #endregion MESSAGES */
+
+/* LOGO effect */
+.logo-animate, .avatar-animate{
+  
+  width: 36px;
+  height: 36px;
+
+  animation: spin 1s linear;
+  }
+
+  @keyframes spin {
+    0%{
+       
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+    100%{
+        transform: rotate(360deg);
+        opacity: 1;
+    }
+  
+    
+  }
 
 @media only screen and (max-width: 600px) {
     #review-text{

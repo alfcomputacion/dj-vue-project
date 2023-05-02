@@ -1,0 +1,15 @@
+<footer class="fixed-bottom text-white row">
+    <div class="col">
+      <div class="float-right m-2 mr-3">Copyright &copy; 2020 ROSOFT</div>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'pages:about-us' %}">About</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'pages:review' %}">Review</a></li>
+          {% endif %}
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'pages:contact-us' %}">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </nav>
+</footer>

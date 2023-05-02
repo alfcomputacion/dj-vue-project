@@ -4,10 +4,13 @@
 {% block title %}Users | admin{% endblock %}
 
 {% block main %}
-<div class="container m-auto pt-2  users-list"
-    style="max-width: 40rem;">
-<h1>Users, Edit Delete</h1>
-<h6 class="text-muted">To feature a review just click reviews and edit review.</h6>
+<div class="container m-auto pt-4  users-list"
+    style="max-width: 50rem;">
+<div class="text-center">
+
+    <h1>Users, Edit Delete</h1>
+    <h6 class="text-muted">To feature a review just click reviews and edit review.</h6>
+</div>
     <ul class="list-group list-group-flush scroll"
         style="height: 30rem;"> 
         {% for user in customuser_list %}

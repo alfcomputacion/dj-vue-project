@@ -1,4 +1,6 @@
 from django.urls import reverse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, DeleteView, UpdateView, ListView
@@ -8,28 +10,30 @@ from django.urls import reverse_lazy
 # Create your views here.
 
 
-class MyAccountPageView(UpdateView):
+class MyAccountPageView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = CustomUserForm
     template_name = 'account/my_account.html'
 
-    success_url = reverse_lazy('users:my-account')
+    success_message = 'Update Successful.'
+    success_url = reverse_lazy('my-account')
 
     def get_object(self):
         return self.request.user
 
 
-class UserAdminPageView(UpdateView):
+class UserAdminPageView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = CustomUserForm
     template_name = 'users/customuser_form.html'
 
+    success_message = 'Update Successful.'
     success_url = reverse_lazy('users:users-list')
 
 
 class CustomUserList(LoginRequiredMixin, ListView):
     model = CustomUser
-    paginate_by = 5
+    paginate_by = 1
 
 
 class CustomUserDetail(DetailView):
@@ -39,3 +43,8 @@ class CustomUserDetail(DetailView):
 class CustomUserDelete(DeleteView):
     model = CustomUser
     success_url = reverse_lazy('users:users-list')
+
+    def delete(self, request, *args, **kwargs):
+        result = super().delete(request, *args, **kwargs)
+        messages.success(self.request, 'User deleted.')
+        return result

@@ -1,0 +1,94 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    {% if not user.is_authenticated %}
+    <div class="logo-animate">
+      <img src="{% static 'images/logo.png' %}" alt="logo" width="50rem" height="35rem" style="padding-right: 1rem;" >
+    </div>
+    
+    {% else %}
+          {% if not user.avatar %}
+            <div class="avatar-animate">
+                <img src="{% static 'images/logo.png' %}" alt="logo" width="50rem" height="35rem" style="padding-right: 1rem;" >
+            </div>
+          {% else %}
+            <div class="text-white avatar-animate"> 
+                <img src="{{user.avatar.url}}" alt="avatar" 
+              style="width: 2rem; height: 2rem; border-radius: 50%; float: right;margin-left: 1rem;">
+            </div>
+            {% endif %}
+    {% endif %}
+      <a class="navbar-brand ml-2" href="#">RO<strong style="text-decoration: double; font-style: italic;">SOFT</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'pages:homepage' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+      
+          {% if not user.is_authenticated %}
+          <li class="nav-item">
+            <a href="{% url 'account_signup' %}" class="nav-link">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+          </li>
+        {% else %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Games
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'games:anagram-game' %}">Anagram Game</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'games:math-game' %}">Math Game</a>
+            <div class="dropdown-divider"></div>
+         
+             <a class="dropdown-item" href="{% url 'my-account' %}">My Account</a>
+             <div class="dropdown-divider"></div>
+            <form action="{% url 'account_logout' %}" method="post">
+              {% csrf_token %}
+              <button class="dropdown-item">Log out</button>
+            </form>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="scoresDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Scores
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" href="{% url 'games:anagram-scores' %}">Anagram Scores</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'games:math-scores' %}">Math Scores</a>
+          </div>
+          </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="scoresDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Leaderboards
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'games:leader-board-anagram' %}">Anagram Leaderboard</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'games:leader-board-math' %}">Math Leaderboard</a>
+          </div>
+          </li>
+        
+        {% endif %}
+         {% if user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:users-list' %}" tabindex="-1">Admin</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light  my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+  </nav>
+    
+ 

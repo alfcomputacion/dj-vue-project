@@ -51,7 +51,7 @@ def show_score(request):
     if asc:
         order = '-' + order
 
-    per_page = 3
+    per_page = 10
 
     scores = GameScore.objects.filter(
         user=request.user, game=game

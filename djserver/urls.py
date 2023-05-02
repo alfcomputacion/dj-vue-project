@@ -8,6 +8,7 @@ from reviews.views import send_review
 
 from django.conf import settings
 from django.conf.urls.static import static
+from users.views import MyAccountPageView
 
 urlpatterns = [
     # User admin
@@ -15,7 +16,8 @@ urlpatterns = [
     path('admin/page/', include('users.urls')),
     path('admin/', admin.site.urls),
 
-    path('account/', include('users.urls')),
+    # path('account/', include('users.urls')),
+    path('my-account/', MyAccountPageView.as_view(), name='my-account'),
     path('account/', include('allauth.urls')),
 
 
