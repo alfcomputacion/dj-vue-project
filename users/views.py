@@ -45,6 +45,7 @@ class CustomUserDelete(DeleteView):
     success_url = reverse_lazy('users:users-list')
 
     def delete(self, request, *args, **kwargs):
-        result = super().delete(request, *args, **kwargs)
+        result = super(CustomUserDelete, self).delete(request, *args, **kwargs)
         messages.success(self.request, 'User deleted.')
+        print(result)
         return result
