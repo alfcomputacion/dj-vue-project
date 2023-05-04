@@ -12,12 +12,12 @@
             </div>
           {% else %}
             <div class="text-white avatar-animate"> 
-                <img src="{{user.avatar.url}}" alt="avatar" 
-              style="width: 2rem; height: 2rem; border-radius: 50%; float: right;margin-left: 1rem;">
+                <a href="{% url 'my-account' %}"><img src="{{user.avatar.url}}" alt="avatar" aria-label="home page"
+                  style="width: 2rem; height: 2rem; border-radius: 50%; float: right;margin-left: 1rem;"></a>
             </div>
             {% endif %}
     {% endif %}
-      <a class="navbar-brand ml-2" href="#">RO<strong style="text-decoration: double; font-style: italic;">SOFT</strong></a>
+      <a class="navbar-brand ml-2" href="{% url 'pages:homepage' %}">RO<strong style="text-decoration: double; font-style: italic;">SOFT</strong></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,6 +51,24 @@
             <form action="{% url 'account_logout' %}" method="post">
               {% csrf_token %}
               <button class="dropdown-item">Log out</button>
+            </form>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Home Two
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'games:anagram-game' %}">Anagram Game 2</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'games:math-game' %}">Math Game 3</a>
+            <div class="dropdown-divider"></div>
+         
+             <a class="dropdown-item" href="{% url 'my-account' %}">My Account Two</a>
+             <div class="dropdown-divider"></div>
+            <form action="{% url 'account_logout' %}" method="post">
+              {% csrf_token %}
+              <button class="dropdown-item">Log out Two</button>
             </form>
           </div>
         </li>

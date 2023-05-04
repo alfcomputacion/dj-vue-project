@@ -13,6 +13,7 @@ class CustomUser(AbstractUser):
     )
 
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    is_admin = models.BooleanField(verbose_name='Admin status', default=False)
 
     def validate_avatar(value):
         w, h = get_image_dimensions(value)

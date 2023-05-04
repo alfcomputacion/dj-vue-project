@@ -3,18 +3,28 @@
 {% block title %}User Detail{% endblock %}
 
 {% block main %}
+    <div class="divide"></div>
     <div class="card border-primary m-auto mb-3 text-center"
         style="max-width: 30rem;">
-        <div class="card-header">{{user.first_name}}</div>
+      
+        <div class="card-header">{{object.first_name}}{{object.last_name}}</div>
         <div class="card-body text-primary">
             <h5>
-                <div class="card-title">{{user.email}}</div>
+                <div class="card-title">{{object.email}}</div>
             </h5>
         </div>
+        {% if user.is_admin  %}
+        <a href="{% url 'users:user-update' object.pk %}">
+            <i class="fas fa-edit float-right mr-2 " style="font-size: 2.3rem;"></i>
+        </a>
+        {% endif %}
         <div class="card-footer">
-            <small class="text-muted">
-                {{user.username}}
+            <small class="text-info">
+                User: <strong>{{object.username}}</strong><br>
+                Date Joined: <strong>{{object.date_joined}}</strong>
             </small>
         </div>
+  
     </div>
+
 {% endblock %}

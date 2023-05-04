@@ -29,16 +29,22 @@ def email_contact_us(request):
 
     print(data)
 
-    user = request.user
+    user = str(request.user)
     email = html.escape(data["email"])
     subject = html.escape(data["subject"])
+    print(subject)
     message = html.escape(data["message"])
     if len(message) > 499:
         message = message[0:500]
-    content = str(user) + "  " + message
+
+    content = f'''
+            <p>Dear Manager, </p>
+            <p>User: {user}</p>
+            <p>{message}</p>
+            <p>from: {email}</p>'''
 
     send_email(to='alfcomputacion@gmail.com',
-               subject=subject, content=content, sender=email)
+               subject=subject, content=content)
 
     response = {
         "success": True

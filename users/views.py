@@ -1,7 +1,8 @@
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, DeleteView, UpdateView, ListView
 from .forms import CustomUserForm
@@ -40,12 +41,6 @@ class CustomUserDetail(DetailView):
     model = CustomUser
 
 
-class CustomUserDelete(DeleteView):
+class CustomUserDelete(LoginRequiredMixin, DeleteView):
     model = CustomUser
     success_url = reverse_lazy('users:users-list')
-
-    def delete(self, request, *args, **kwargs):
-        result = super(CustomUserDelete, self).delete(request, *args, **kwargs)
-        messages.success(self.request, 'User deleted.')
-        print(result)
-        return result

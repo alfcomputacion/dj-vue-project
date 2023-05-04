@@ -4,6 +4,7 @@
 {% block title %}Delete Confirm{% endblock %}
 
 {% block main %}
+{% if user.is_admin %}
     <div class="container pt-3"
         style="max-width: 40rem;">
         <div class="card m-auto mb-3">
@@ -31,4 +32,7 @@
             </div>
         </div>
     </div>
+    {% else %}
+    {% include '403.html' %}
+    {% endif %}
 {% endblock %}

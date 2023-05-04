@@ -1,6 +1,14 @@
 body{
    background: whitesmoke;
 }
+.bg-forbidden{
+    background: url("../images/403Forbidden.svg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
 .box-shadow{
 
     box-shadow: .05rem .1rem 0.5rem black;
@@ -28,7 +36,7 @@ footer{
     overflow-x: hidden;
   }
 .divide{
-    padding: .5rem;
+    padding: .3rem;
 }
 
 .navbar{
@@ -65,7 +73,9 @@ footer{
 }
 /* #region MESSAGES */ 
 .alert{
-    margin: 5% 40%;
+
+    width: 75%;
+    margin: 2px 0;
     z-index: 100;
 }
 .msg{
@@ -104,7 +114,7 @@ footer{
 
 /* LOGO effect */
 .logo-animate, .avatar-animate{
-  opacity: 0;
+  opacity: 1;
   width: 36px;
   height: 36px;
 
@@ -113,7 +123,7 @@ footer{
 
   @keyframes spin {
     0%{
-       
+       opacity: 0;
         transform: rotate(0deg);
         
     }

@@ -3,17 +3,32 @@
 {% block title %}Reviews{% endblock %}
 
 {% block main %}
-<div class="container" style="max-width: 50rem;">
+{% if user.is_admin %}
+<div class="container" style="max-width: 60rem;">
 
-    <h1 class="pt-2">HEllo from reviews </h1>
-    <ul>
+    <h1 class="pt-2 m-auto">Reviews</h1>
+    <ul class="list-group list-group-flush scroll" style="max-width: 60rem;">
         {% for review in review_list %}
-        <li>ID {{review.id}} 
-            REVIEW {{review.review}} 
-            USER ID {{review.user_id}}</li>
+        <li>
+             
+            <span class="text-info">
+                <a href="{% url 'users:user-detail' review.user_id  %}"><Strong>{{review.user.username}}</Strong></a><br>
+            </span>
+            {{review.review}} 
+            <span class="text-muted">{{review.created}}</span>
+            
+            <a href="{% url 'reviews:review-update' review.id %}">
+                <span>
+                    <i class="fas fa-edit float-right mr-2 mt-1"></i>
+                </span>
+            </a>
+        </li>
         
         {% endfor %}
     </ul>
+    {% include 'common/pagination.html' %}
 </div>
-
+{% else %}
+{% include '403.html' %}
+{% endif %}
 {% endblock %}

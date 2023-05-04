@@ -4,12 +4,20 @@
 {% block title %}Users | admin{% endblock %}
 
 {% block main %}
-<div class="container m-auto pt-4  users-list"
+{% if user.is_staff %}
+<div class="container m-auto pt-1  users-list"
     style="max-width: 50rem;">
 <div class="text-center">
 
     <h1>Users, Edit Delete</h1>
-    <h6 class="text-muted">To feature a review just click reviews and edit review.</h6>
+    <h6 class="text-muted">
+        To feature a review just click reviews and edit review, or  
+        <a href="{% url 'reviews:review-list' %}">
+        <i class="fas fa-edit mr-2 mt-1">
+            All Reviews
+        </i>
+    </a></h6>
+   
 </div>
     <ul class="list-group list-group-flush scroll"
         style="height: 30rem;"> 
@@ -71,41 +79,9 @@
         {% endfor %}
         
     </ul>
-    <span>Page {{page_obj.number}} of {{ page_obj.paginator.num_pages}}</span>
-    <nav aria-label="pagination">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a href="?page=1" class="page-link">&laquo; 1 . . .</a>
-                </li>
-                {% if page_obj.previous_page_number != 1 %}
-                    <li class="page-item">
-                        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
-                            {{ page_obj.previous_page_number }}
-                        </a>
-                    </li>
-                {% endif %}
-            {% endif %}
-            <li class="page-item active">
-                <span class="page-link">
-                    {{ page_obj.number }}
-                </span>
-            </li>
-            {% if page_obj.has_next %}
-                {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
-                <li class="page-item">
-                    <a href="?page={{ page_obj.next_page_number }}" class="page-link">
-                        {{ page_obj.next_page_number }}
-                    </a>
-                </li>
-                {% endif %}
-                <li class="page-item">
-                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">
-                        . . .{{ page_obj.paginator.num_pages }} &raquo;
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
-</div>    
+   {% include 'common/pagination.html' %}
+</div>  
+{% else %} 
+{% include '403.html' %}
+{% endif %}
 {% endblock %}
