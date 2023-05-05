@@ -30,7 +30,7 @@ footer{
 .scroll{
     margin-top: 0;
     margin: auto;
-    max-width: 40rem;
+    max-width:50rem;
     height: 25rem;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -74,7 +74,7 @@ footer{
 /* #region MESSAGES */ 
 .alert{
 
-    width: 75%;
+    width: 85%;
     margin: 2px 0;
     z-index: 100;
 }

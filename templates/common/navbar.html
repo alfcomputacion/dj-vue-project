@@ -38,14 +38,9 @@
         {% else %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Games
+            Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'games:anagram-game' %}">Anagram Game</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'games:math-game' %}">Math Game</a>
-            <div class="dropdown-divider"></div>
-         
              <a class="dropdown-item" href="{% url 'my-account' %}">My Account</a>
              <div class="dropdown-divider"></div>
             <form action="{% url 'account_logout' %}" method="post">
@@ -54,24 +49,19 @@
             </form>
           </div>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Home Two
+            Games
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'games:anagram-game' %}">Anagram Game 2</a>
+            <a class="dropdown-item" href="{% url 'games:anagram-game' %}">Anagram Game</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'games:math-game' %}">Math Game 3</a>
-            <div class="dropdown-divider"></div>
-         
-             <a class="dropdown-item" href="{% url 'my-account' %}">My Account Two</a>
-             <div class="dropdown-divider"></div>
-            <form action="{% url 'account_logout' %}" method="post">
-              {% csrf_token %}
-              <button class="dropdown-item">Log out Two</button>
-            </form>
+            <a class="dropdown-item" href="{% url 'games:math-game' %}">Math Game</a>
+            
           </div>
         </li>
+       
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="scoresDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -103,8 +93,9 @@
           {% endif %}
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light  my-2 my-sm-0" type="submit">Search</button>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" id="searchText"   aria-label="SearchText">
+
+          <button class="btn btn-outline-light  my-2 my-sm-0" id="searchButton" type="submit">Search</button>
         </form>
       </div>
   </nav>

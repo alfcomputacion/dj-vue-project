@@ -61,9 +61,9 @@ def show_score(request):
     page_obj = paginator.get_page(post_data['page'])
     num_pages = page_obj.paginator.num_pages
 
-    print(num_pages)
+    # print(num_pages)
     data = page_obj.object_list.count()
-    print(scores.count())
+    # print(scores.count())
     # js_data = serializers.serialize('json', data)
     js_data = [{"game": kw.game, "operation": kw.operation,
                 "max_number": kw.max_number, "score": kw.score,
@@ -76,14 +76,9 @@ def show_score(request):
             "has_previous": page_obj.has_previous(),
             "total_records": scores.count(),
             "num_pages": num_pages,
-
-
-
-
         },
         "user": user,
         "data": js_data,
-
     }
     return JsonResponse(payload)
 
@@ -93,8 +88,11 @@ def show_ledear_board(request):
     game = post_data['game']
     asc = post_data['asc']
     order = post_data['order']
+
+    search = post_data['search']
+
     user = str(request.user)
-    print(type(user))
+    # print(type(user))
     per_page = 10
 
     if asc:
@@ -102,7 +100,8 @@ def show_ledear_board(request):
 
     scores = list(GameScore.objects.values(
 
-        'user__avatar', 'user__username', 'score', 'operation', 'max_number', 'game', 'created').filter(game=game).order_by(order, '-created'))
+        'user__avatar', 'user__username', 'score', 'operation', 'max_number', 'game', 'created').
+        filter(Q(user__username__icontains=search) & Q(game=game)).order_by(order, '-created'))
     paginator = Paginator(scores, per_page)
 
     page_obj = paginator.get_page(post_data['page'])
@@ -120,7 +119,7 @@ def show_ledear_board(request):
         "user": user,
         "data": page_obj.object_list
     }
-    return JsonResponse(response, safe=False)
+    return JsonResponse(response)
 
     # data = CustomUser.objects.filter(user__username=request.user)
     # js_data = serializers.serialize('json', data)
@@ -138,15 +137,15 @@ class GameScoreView(ListView):
     paginate_by = 5
     template_name = 'games/game-scores.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(GameScoreView, self).get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     context = super(GameScoreView, self).get_context_data(**kwargs)
 
-        context['anagram_scores'] = GameScore.objects.filter(
-            game__exact='ANAGRAM').order_by('-score')[:5]
+    #     context['anagram_scores'] = GameScore.objects.filter(
+    #         game__exact='ANAGRAM').order_by('-score')[:5]
 
-        context['math_scores'] = GameScore.objects.filter(
-            game__exact='MATH').order_by('-score')[:5]
-        return context
+    #     context['math_scores'] = GameScore.objects.filter(
+    #         game__exact='MATH').order_by('-score')[:5]
+    #     return context
 
 
 class LeaderBoardView(ListView):

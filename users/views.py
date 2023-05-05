@@ -34,7 +34,7 @@ class UserAdminPageView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 class CustomUserList(LoginRequiredMixin, ListView):
     model = CustomUser
-    paginate_by = 1
+    paginate_by = 10
 
 
 class CustomUserDetail(DetailView):
