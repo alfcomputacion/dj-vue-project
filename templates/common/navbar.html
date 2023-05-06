@@ -92,11 +92,24 @@
           </li>
           {% endif %}
         </ul>
+        {% if user.is_authenticated %}
+        {% if "leader-board" in request.path %}
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" id="searchText"   aria-label="SearchText">
 
           <button class="btn btn-outline-light  my-2 my-sm-0" id="searchButton" type="submit">Search</button>
         </form>
+        {% endif %}
+        {% if  "admin/page" in request.path or "reviews" in request.path %}
+        <form class="form-inline my-2 my-lg-0" action="{% url 'users:users-list' %}">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" 
+              id="searchTxt"   aria-label="SearchText" 
+              name="q" value="{{ reques.GET.q }}">
+
+          <button class="btn btn-outline-light  my-2 my-sm-0" id="searchButton" type="submit">Search</button>
+        </form>
+        {% endif %}
+        {% endif %}
       </div>
   </nav>
     

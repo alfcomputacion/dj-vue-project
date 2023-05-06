@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.db.models import Q
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
@@ -34,7 +35,15 @@ class UserAdminPageView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 class CustomUserList(LoginRequiredMixin, ListView):
     model = CustomUser
-    paginate_by = 10
+    paginate_by = 1
+
+    def get_queryset(self):
+        qs = CustomUser.objects.all()
+
+        if 'q' in self.request.GET:
+            q = self.request.GET.get('q')
+            qs = qs.filter(Q(username__icontains=q))
+        return qs.order_by('username')
 
 
 class CustomUserDetail(DetailView):

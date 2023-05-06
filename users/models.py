@@ -3,8 +3,15 @@ from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 from django.core.files.images import get_image_dimensions
 from django.core.exceptions import ValidationError
-from reviews.models import Review
+
 # Create your models here.
+
+
+def validate_avatar(value):
+    w, h = get_image_dimensions(value)
+    if w > 250 or h > 250:
+        raise ValidationError(
+            'Avatar must be no bigger than 250x250 pixels')
 
 
 class CustomUser(AbstractUser):
@@ -12,14 +19,13 @@ class CustomUser(AbstractUser):
         verbose_name='Date of Birth', null=True, blank=True
     )
 
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    is_admin = models.BooleanField(verbose_name='Admin status', default=False)
+    avatar = models.ImageField(upload_to='avatars/',
+                               null=True, blank=True,
+                               help_text='Image must be 250px by 250px',
+                               validators=[validate_avatar])
 
-    def validate_avatar(value):
-        w, h = get_image_dimensions(value)
-        if w > 250 or h > 250:
-            raise ValidationError(
-                'Avatar must be no bigger than 250x250 pixels')
+    is_admin = models.BooleanField(verbose_name='Admin status',
+                                   default=False)
 
     @property
     def num_reviews(self):

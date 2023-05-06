@@ -13,6 +13,6 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         ('Optional Fields', {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'avatar'),
+            'fields': ('email', 'first_name', 'last_name', 'avatar', 'dob', 'is_staff', 'is_admin'),
         }),
     )

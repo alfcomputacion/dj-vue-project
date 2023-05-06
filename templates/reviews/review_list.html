@@ -12,7 +12,9 @@
         <li>
              
             <span class="text-info">
-                <a href="{% url 'users:user-detail' review.user_id  %}"><Strong>{{review.user.username}}</Strong></a><br>
+                <a href="{% url 'users:user-detail' review.user_id  %}">
+                    <Strong>{{review.user.username}}</Strong>
+                </a><br>
             </span>
             {{review.review}} 
             <span class="text-muted">{{review.created}}</span>

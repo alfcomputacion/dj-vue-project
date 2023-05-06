@@ -21,6 +21,7 @@
 </div>
     <ul class="list-group list-group-flush scroll"
         style="height: 30rem;"> 
+        <input type="hidden" name="q" value="{{ request.GET.q }}">
         {% for user in customuser_list %}
         <li class="list-group-item"> 
             {% if user.avatar %}
@@ -29,7 +30,9 @@
             <img src="{% static 'images/logo.png' %}" alt="logo" style="width: 3rem;height: 3rem; border-radius: 50%; float: left;">
             {% endif %}
             <span class="pl-4 text-info">
-                <strong>{{user.username}}</strong> <br>
+               <a href="{% url 'users:user-update' user.pk %}">
+                   <small><strong>{{user.username}}</strong></small> <br>
+               </a> 
             </span>
             <span class="text-secondary pl-2">
                     <strong>{{ user.first_name }} {{ user.last_name }} </strong>

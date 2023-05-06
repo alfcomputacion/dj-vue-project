@@ -3,21 +3,33 @@
 {% block title %}User Detail{% endblock %}
 
 {% block main %}
+{% if user.is_admin %}
     <div class="divide"></div>
     <div class="card border-primary m-auto mb-3 text-center"
         style="max-width: 30rem;">
       
-        <div class="card-header">{{object.first_name}}{{object.last_name}}</div>
-        <div class="card-body text-primary">
+        <div class="card-header text-primary"><span class="text-muted">Name:</span> {{object.first_name}} {{object.last_name}}</div>
+        <div class="card-body">
             <h5>
-                <div class="card-title">{{object.email}}</div>
+                <div class="card-title text-primary">INFO: </div>
             </h5>
+            <div class="card-text text-left">
+                
+                Email:  <strong>{{object.email}}</strong><br>
+                Date of Birth:  <strong>{{ object.dob }}</strong><br>
+                Staff status:  <strong>{{ object.is_staff }}</strong><br>
+                Super User status:  <strong>{{ object.is_superuser }}</strong><br>
+                Super User status:  <strong>{{ object.is_superuser }}</strong><br>
+                Last Login:  <strong>{{ object.last_login }}</strong><br>
+                Admin status: <strong>{{object.is_admin }}</strong>
+
+            </div>
         </div>
-        {% if user.is_admin  %}
+       
         <a href="{% url 'users:user-update' object.pk %}">
             <i class="fas fa-edit float-right mr-2 " style="font-size: 2.3rem;"></i>
         </a>
-        {% endif %}
+       
         <div class="card-footer">
             <small class="text-info">
                 User: <strong>{{object.username}}</strong><br>
@@ -26,5 +38,5 @@
         </div>
   
     </div>
-
+{% endif %}
 {% endblock %}
