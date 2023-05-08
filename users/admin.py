@@ -10,6 +10,11 @@ CustomUser = get_user_model()
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
+    fieldsets = (
+        (None, {'fields': ('avatar', 'dob',)}),
+        (None, {'fields': ('is_admin',)}),
+    ) + UserAdmin.fieldsets
+
     add_fieldsets = UserAdmin.add_fieldsets + (
         ('Optional Fields', {
             'classes': ('wide',),

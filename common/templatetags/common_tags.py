@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.inclusion_tag('common/review.html')
 def random_review():
-    count = Review.objects.count()
+    count = Review.objects.filter(featured=True).count()
     if count > 0:
         while True:
             i = random.randint(0, count-1)
@@ -20,7 +20,7 @@ def random_review():
         return {
             'review': {
                 'user': 'Fake Random user.',
-                'review': 'Fake review Very good site.',
+                'review': 'Fake review Very good site. NO FEATURED REVIEWS YET!',
                 'created': 'Fake date Yesterday.'
             }
         }
