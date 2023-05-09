@@ -21,17 +21,18 @@
             <div class="form-row">
                 
             <div class="form-group col-md-6 mb-5">
-
+<!-- 
                 <label for="id_avatar">Avatar</label>
                 <input type="file" name="avatar" accept="image/*" 
                 class="clearablefileinput form-control-file" 
-                id="id_avatar">
+                id="id_avatar"> -->
+
+                {{ form.avatar|as_crispy_field }}
             </div>
             {% if user.is_admin %}
             <div class="form-group col-md-6">
                 {{ form.is_staff|as_crispy_field}}
-                
-                    {{form.is_admin|as_crispy_field}}
+                {{form.is_admin|as_crispy_field}}
                  
             </div>
             {% endif %}

@@ -20,7 +20,8 @@ def random_review():
         return {
             'review': {
                 'user': 'Fake Random user.',
-                'review': 'Fake review Very good site. NO FEATURED REVIEWS YET!',
+                'review':
+                'Fake review Very good site. NO FEATURED REVIEWS YET!, to feature any review go to admin page.',
                 'created': 'Fake date Yesterday.'
             }
         }

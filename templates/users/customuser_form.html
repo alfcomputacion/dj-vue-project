@@ -10,8 +10,8 @@
     <div class="card border-primary m-auto  pt-1 mb-0 bg-light" style="max-width: 40rem;">
         <div class="card-title text-center">You are on <span class="text-primary">{{ form.username.value }}'s</span> account</div>
         <div class="card-body">
-            {% if user.avatar and not form.avatar.errors %}
-            <img style="width: 5rem;" src="{{ user.avatar.url }}" alt="Avatar" class="avatar img-thumbnail float-left d-block">
+            {% if object.avatar and not form.avatar.errors %}
+            <img style="width: 5rem;" src="{{ object.avatar.url }}" alt="Avatar" class="avatar img-thumbnail float-left d-block">
             {% endif %}
             <form action="" method="post" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
@@ -19,12 +19,9 @@
                 <div class="form-row">
                     
                     <div class="form-group col-md-6 mb-0">
-                        
-                        <label for="id_avatar">Avatar</label>
-                        <input type="file" name="avatar" accept="image/*" 
-                        class="clearablefileinput form-control-file" 
-                        id="id_avatar">
+                        {{ form.avatar|as_crispy_field }}
                     </div>
+             
                     <div class="form-group col-md-6 ">
                         {% if user.is_admin %}
                         {{ form.is_staff|as_crispy_field}}

@@ -18,7 +18,11 @@
             </span>
             {{review.review}} 
             <span class="text-muted">{{review.created}}</span>
-            
+            {% if review.featured %}
+            <span class="text-muted">( FEATURED )</span>
+            {% else %}
+            <span class="text-muted">( NOT FEATURED edit to feature review.)</span>
+            {% endif %}
             <a href="{% url 'reviews:review-update' review.id %}">
                 <span>
                     <i class="fas fa-edit float-right mr-2 mt-1"></i>
