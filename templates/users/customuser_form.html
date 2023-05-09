@@ -26,13 +26,13 @@
                         id="id_avatar">
                     </div>
                     <div class="form-group col-md-6 ">
+                        {% if user.is_admin %}
                         {{ form.is_staff|as_crispy_field}}
-                        {% if user.username != object.username and user.is_admin %}
-             
                         {{form.is_admin|as_crispy_field}}
                         
                         {% endif %}
                     </div>
+
                 </div>
         
                 

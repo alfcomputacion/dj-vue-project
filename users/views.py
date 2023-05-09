@@ -32,6 +32,11 @@ class UserAdminPageView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     success_message = 'Update Successful.'
     success_url = reverse_lazy('users:users-list')
 
+    def form_valid(self, form):
+        data = form.cleaned_data
+        print(data)
+        return super().form_valid(form)
+
 
 class CustomUserList(LoginRequiredMixin, ListView):
     model = CustomUser
@@ -42,7 +47,7 @@ class CustomUserList(LoginRequiredMixin, ListView):
 
         if 'q' in self.request.GET:
             q = self.request.GET.get('q')
-            qs = qs.filter(Q(username__icontains=q))
+            qs = qs.filter(username__icontains=q)
         return qs.order_by('username')
 
 
