@@ -8,7 +8,11 @@
 {% if user.is_staff %}
 <span class="pt-1"></span>
     <div class="card border-primary m-auto  pt-1 mb-0 bg-light" style="max-width: 40rem;">
+        {% if object.username == user.username %}
+        <div class="card-title text-center">You are on <span class="text-primary">My account</span></div>
+        {% else %}
         <div class="card-title text-center">You are on <span class="text-primary">{{ form.username.value }}'s</span> account</div>
+        {% endif %}
         <div class="card-body">
             {% if object.avatar and not form.avatar.errors %}
             <img style="width: 5rem;" src="{{ object.avatar.url }}" alt="Avatar" class="avatar img-thumbnail float-left d-block">
