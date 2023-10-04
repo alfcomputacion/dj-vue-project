@@ -162,6 +162,13 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300  # Default 300
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'  # Default: '/'
 ACCOUNT_USERNAME_REQUIRED = False  # Default: True
 
+EMAIL_HOST = 'smtp.dreamhost.com'
+EMAIL_PORT =  587
+EMAIL_USE_TSL = True
+EMAIL_HOST_USER = 'info@alfcomputacion.com'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+DEFAULT_FROM_EMAIL = 'info@alfcomputacion.com'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
